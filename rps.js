@@ -56,10 +56,25 @@ function playRound(playerSelection,computerSelection){
 
 function game(){
 
+    let winCondition;
+    let win=0;
+    let lose=0;
     for (let i = 1; i <= 5; i++) {
         console.log("Round "+i);
         playerSelection=prompt("Rock Paper Scissors!");
         computerSelection=getComputerChoice();
-        playRound(playerSelection,computerSelection);
+        winCondition=playRound(playerSelection,computerSelection);
+        if(winCondition=="WIN"){
+            win++;
+        }
+        else if(winCondition=="LOSE"){
+            lose++;
+        }
+        console.log(`You:${win} | Computer: ${lose}`);
+     }
+     if(win>lose){
+        console.log("YOU WIN!");
+     }else{
+        console.log("YOU LOSE :(");
      }
 }
