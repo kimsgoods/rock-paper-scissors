@@ -1,3 +1,12 @@
+const choices = document.querySelectorAll("button");
+const status = document.getElementById("status");
+const score = document.getElementById("score");
+const final = document.getElementById("final");
+let winCondition;
+let win=0;
+let lose=0;
+let round=0;
+
 function getComputerChoice(){
     let randomChoice=Math.floor(Math.random()*3)+1;
     let computerSelection="";
@@ -16,7 +25,7 @@ function getComputerChoice(){
 
 function playRound(playerSelection,computerSelection){
     let winCondition="";
-
+    round++;
 
     if(playerSelection.toUpperCase()=="ROCK"){
         if(computerSelection.toUpperCase()=="ROCK"){
@@ -49,32 +58,43 @@ function playRound(playerSelection,computerSelection){
         return;
     }
     console.log("You used "+playerSelection.toUpperCase()+" against the computer's "+computerSelection.toUpperCase());
+    status.innerText=`You used ${playerSelection.toUpperCase()} against the computer's ${computerSelection.toUpperCase()}`;
     console.log(winCondition);
+    final.innerText=`Round ${round}: ${winCondition}`;
     return winCondition;
 
 }
 
-function game(){
-
-    let winCondition;
-    let win=0;
-    let lose=0;
-    for (let i = 1; i <= 5; i++) {
-        console.log("Round "+i);
-        playerSelection=prompt("Rock Paper Scissors!");
-        computerSelection=getComputerChoice();
-        winCondition=playRound(playerSelection,computerSelection);
-        if(winCondition=="WIN"){
-            win++;
+function game(){    
+    
+    playerSelection=ps;
+    computerSelection=getComputerChoice();
+    winCondition=playRound(playerSelection,computerSelection);
+    if(winCondition=="WIN"){
+        win++;
+    }else if(winCondition=="LOSE"){
+        lose++;
+    }
+    console.log(`You:${win} | Computer: ${lose}`);
+    score.innerText=`You: ${win} | Computer: ${lose}`;
+    if(win == 5 || lose == 5){
+        choices.forEach(choice => choice.disabled=true);
+        if(win>lose){
+            console.log("YOU WIN!");
+            final.innerText = "YOU WIN!";
+        }else{
+            console.log("YOU LOSE :(");
+            final.innerText = "YOU LOSE!";
         }
-        else if(winCondition=="LOSE"){
-            lose++;
-        }
-        console.log(`You:${win} | Computer: ${lose}`);
-     }
-     if(win>lose){
-        console.log("YOU WIN!");
-     }else{
-        console.log("YOU LOSE :(");
-     }
+    }
 }
+
+
+function getChoice(e){
+    console.log(e.target.id);
+    ps =  e.target.id;
+    game();
+}
+
+
+choices.forEach(choice => choice.addEventListener("click",getChoice)); 
