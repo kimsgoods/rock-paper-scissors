@@ -1,3 +1,7 @@
+html{
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
 .container{
     display: flex;
     flex-direction: column;
@@ -17,25 +21,52 @@
     flex-direction: column;
     align-items: center;
 }
+
 button{
     transition-duration: 0.4s;
     width: 150px;
-    height: 50px;
+    height: 150px;
     margin: 5px 10px;
+    border-radius: 10%;
+    padding: 100px;
+    border: 0;
 }
 
-/*#rock:hover {
-    background-color: red; 
-    color: white;
+button:disabled{
+    opacity: 0.6;
+    cursor: not-allowed;
 }
 
-#paper:hover {
-    background-color: green; 
-    color: white;
+#rock {
+    background-image: url(images/fist.png);
+    background-size: cover;
+    background-color: red;
 }
 
-#scissors:hover {
-    background-color: blue; 
-    color: white;
+#paper{
+    background-image: url(images/hand.png);
+    background-size: cover;
+    background-color: green;
 }
-*/
+
+#scissors{
+    background-image: url(images/peace.png);
+    background-size: cover;
+    background-color: blue;
+}
+
+#rock:hover:enabled {    
+    background-color: pink;
+}
+
+#paper:hover:enabled {    
+    background-color: yellow;
+}
+
+#scissors:hover:enabled {    
+    background-color: violet;
+}
+
+#rock:disabled, #paper:disabled, #scissors:disabled{
+    background-color: white;
+}
